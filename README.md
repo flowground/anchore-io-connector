@@ -1,11 +1,11 @@
-# ![LOGO](logo.png) Anchore Engine API Server MSP Connector
+# ![LOGO](logo.png) Anchore Engine API Server **flow**ground Connector
 
 ## Description
 
-A generated MSP connector for the Anchore Engine API Server API (version 0.1.9).
+A generated **flow**ground connector for the Anchore Engine API Server API (version 0.1.9).
 
 Generated from: https://api.apis.guru/v2/specs/anchore.io/0.1.9/swagger.json<br/>
-Generated at: 2019-05-07T11:16:54+03:00
+Generated at: 2019-05-07T17:36:33+03:00
 
 ## API Description
 
@@ -655,7 +655,7 @@ Supported authorization schemes:
 
 ## License
 
-flowground :- Telekom iPaaS / anchore-io-connector<br/>
+**flow**ground :- Telekom iPaaS / anchore-io-connector<br/>
 Copyright © 2019, [Deutsche Telekom AG](https://www.telekom.de)<br/>
 contact: flowground@telekom.de
 
