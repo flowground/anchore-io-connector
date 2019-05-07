@@ -1,0 +1,51 @@
+{
+    "type": "object",
+    "properties": {
+        "force": {
+            "required": false,
+            "type": "boolean"
+        },
+        "autosubscribe": {
+            "required": false,
+            "type": "boolean"
+        },
+        "requestBody": {
+            "description": "A request to add an image to be watched and analyzed by the engine. Optionally include the dockerfile content. Either digest or tag must be present",
+            "properties": {
+                "annotations": {
+                    "description": "Annotations to be associated with the added image in key/value form",
+                    "type": "object"
+                },
+                "created_at": {
+                    "description": "Optional override of the image creation time, only honored when both tag and digest are also supplied  e.g. 2018-10-17T18:14:00Z",
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "digest": {
+                    "description": "A full pullable digest reference for an image. e.g. docker.io/nginx@sha256:abc123",
+                    "type": "string"
+                },
+                "dockerfile": {
+                    "description": "Content of the dockerfile for the image, if available",
+                    "type": "string"
+                },
+                "image_type": {
+                    "description": "The type of image this is adding, defaults to \"docker\"",
+                    "type": "string"
+                },
+                "tag": {
+                    "description": "Full pullable tag reference for image. e.g. docker.io/nginx:latest",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "tag"
+            ],
+            "type": "object"
+        },
+        "x_anchore_account": {
+            "required": false,
+            "type": "string"
+        }
+    }
+}

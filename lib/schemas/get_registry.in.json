@@ -1,0 +1,13 @@
+{
+    "type": "object",
+    "properties": {
+        "registry": {
+            "required": true,
+            "type": "string"
+        },
+        "x_anchore_account": {
+            "required": false,
+            "type": "string"
+        }
+    }
+}

@@ -1,0 +1,21 @@
+{
+    "type": "object",
+    "properties": {
+        "before": {
+            "required": false,
+            "type": "string"
+        },
+        "since": {
+            "required": false,
+            "type": "string"
+        },
+        "level": {
+            "required": false,
+            "type": "string"
+        },
+        "x_anchore_account": {
+            "required": false,
+            "type": "string"
+        }
+    }
+}

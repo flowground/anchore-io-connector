@@ -1,0 +1,29 @@
+{
+    "type": "object",
+    "properties": {
+        "history": {
+            "required": false,
+            "type": "boolean"
+        },
+        "fulltag": {
+            "required": false,
+            "type": "string"
+        },
+        "requestBody": {
+            "description": "Filter for an image list by id, tag, or digest, but not both",
+            "properties": {
+                "digest": {
+                    "type": "string"
+                },
+                "tag": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "x_anchore_account": {
+            "required": false,
+            "type": "string"
+        }
+    }
+}

@@ -1,0 +1,29 @@
+{
+    "type": "object",
+    "properties": {
+        "accountname": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "description": "A payload for creating a new user, includes the username and password in a single request",
+            "properties": {
+                "password": {
+                    "description": "The initial password for the user, must be at least 6 characters, up to 128",
+                    "pattern": ".{6,128}$",
+                    "type": "string"
+                },
+                "username": {
+                    "description": "The username to create",
+                    "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{1,126}[a-zA-Z0-9]$",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "username",
+                "password"
+            ],
+            "type": "object"
+        }
+    }
+}

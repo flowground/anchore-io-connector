@@ -1,0 +1,17 @@
+{
+    "type": "object",
+    "properties": {
+        "imageId": {
+            "required": true,
+            "type": "string"
+        },
+        "force": {
+            "required": false,
+            "type": "boolean"
+        },
+        "x_anchore_account": {
+            "required": false,
+            "type": "string"
+        }
+    }
+}

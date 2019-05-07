@@ -1,0 +1,317 @@
+{
+    "type": "object",
+    "properties": {
+        "requestBody": {
+            "description": "A bundle containing a set of policies, whitelists, and rules for mapping them to specific images",
+            "properties": {
+                "blacklisted_images": {
+                    "description": "List of mapping rules that define which images should always result in a STOP/FAIL policy result regardless of policy content or presence in whitelisted_images",
+                    "items": {
+                        "properties": {
+                            "id": {
+                                "type": "string"
+                            },
+                            "image": {
+                                "description": "A reference to an image",
+                                "properties": {
+                                    "type": {
+                                        "enum": [
+                                            "tag",
+                                            "digest",
+                                            "id"
+                                        ]
+                                    },
+                                    "value": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "type",
+                                    "value"
+                                ],
+                                "type": "object"
+                            },
+                            "name": {
+                                "type": "string"
+                            },
+                            "registry": {
+                                "type": "string"
+                            },
+                            "repository": {
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "name",
+                            "registry",
+                            "repository",
+                            "image"
+                        ],
+                        "type": "object"
+                    },
+                    "type": "array"
+                },
+                "comment": {
+                    "description": "Description of the bundle, human readable",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "Id of the bundle",
+                    "type": "string"
+                },
+                "mappings": {
+                    "description": "Mapping rules for defining which policy and whitelist(s) to apply to an image based on a match of the image tag or id. Evaluated in order.",
+                    "items": {
+                        "properties": {
+                            "id": {
+                                "type": "string"
+                            },
+                            "image": {
+                                "description": "A reference to an image",
+                                "properties": {
+                                    "type": {
+                                        "enum": [
+                                            "tag",
+                                            "digest",
+                                            "id"
+                                        ]
+                                    },
+                                    "value": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "type",
+                                    "value"
+                                ],
+                                "type": "object"
+                            },
+                            "name": {
+                                "type": "string"
+                            },
+                            "policy_id": {
+                                "description": "Optional single policy to evalute, if set will override any value in policy_ids, for backwards compatibility. Generally, policy_ids should be used even with a array of length 1.",
+                                "type": "string"
+                            },
+                            "policy_ids": {
+                                "description": "List of policyIds to evaluate in order, to completion",
+                                "items": {
+                                    "description": "PolicyId to evaluate",
+                                    "type": "string"
+                                },
+                                "type": "array"
+                            },
+                            "registry": {
+                                "type": "string"
+                            },
+                            "repository": {
+                                "type": "string"
+                            },
+                            "whitelist_ids": {
+                                "items": {
+                                    "type": "string"
+                                },
+                                "type": "array"
+                            }
+                        },
+                        "required": [
+                            "name",
+                            "registry",
+                            "repository",
+                            "image"
+                        ],
+                        "type": "object"
+                    },
+                    "type": "array"
+                },
+                "name": {
+                    "description": "Human readable name for the bundle",
+                    "type": "string"
+                },
+                "policies": {
+                    "description": "Policies which define the go/stop/warn status of an image using rule matches on image properties",
+                    "items": {
+                        "properties": {
+                            "comment": {
+                                "type": "string"
+                            },
+                            "id": {
+                                "type": "string"
+                            },
+                            "name": {
+                                "type": "string"
+                            },
+                            "rules": {
+                                "items": {
+                                    "description": "A rule that defines and decision value if the match is found true for a given image.",
+                                    "properties": {
+                                        "action": {
+                                            "enum": [
+                                                "GO",
+                                                "STOP",
+                                                "WARN"
+                                            ]
+                                        },
+                                        "gate": {
+                                            "type": "string"
+                                        },
+                                        "id": {
+                                            "type": "string"
+                                        },
+                                        "params": {
+                                            "items": {
+                                                "properties": {
+                                                    "name": {
+                                                        "type": "string"
+                                                    },
+                                                    "value": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "name",
+                                                    "value"
+                                                ],
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        },
+                                        "trigger": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "gate",
+                                        "trigger",
+                                        "action"
+                                    ],
+                                    "type": "object"
+                                },
+                                "type": "array"
+                            },
+                            "version": {
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "id",
+                            "version"
+                        ],
+                        "type": "object"
+                    },
+                    "type": "array"
+                },
+                "version": {
+                    "description": "Version id for this bundle format",
+                    "type": "string"
+                },
+                "whitelisted_images": {
+                    "description": "List of mapping rules that define which images should always be passed (unless also on the blacklist), regardless of policy result.",
+                    "items": {
+                        "properties": {
+                            "id": {
+                                "type": "string"
+                            },
+                            "image": {
+                                "description": "A reference to an image",
+                                "properties": {
+                                    "type": {
+                                        "enum": [
+                                            "tag",
+                                            "digest",
+                                            "id"
+                                        ]
+                                    },
+                                    "value": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "type",
+                                    "value"
+                                ],
+                                "type": "object"
+                            },
+                            "name": {
+                                "type": "string"
+                            },
+                            "registry": {
+                                "type": "string"
+                            },
+                            "repository": {
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "name",
+                            "registry",
+                            "repository",
+                            "image"
+                        ],
+                        "type": "object"
+                    },
+                    "type": "array"
+                },
+                "whitelists": {
+                    "description": "Whitelists which define which policy matches to disregard explicitly in the final policy decision",
+                    "items": {
+                        "description": "A collection of whitelist items to match a policy evaluation against.",
+                        "properties": {
+                            "comment": {
+                                "type": "string"
+                            },
+                            "id": {
+                                "type": "string"
+                            },
+                            "items": {
+                                "items": {
+                                    "description": "Identifies a specific gate and trigger match from a policy against an image and indicates it should be ignored in final policy decisions",
+                                    "properties": {
+                                        "gate": {
+                                            "type": "string"
+                                        },
+                                        "id": {
+                                            "type": "string"
+                                        },
+                                        "trigger_id": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "gate",
+                                        "trigger_id"
+                                    ],
+                                    "type": "object"
+                                },
+                                "type": "array"
+                            },
+                            "name": {
+                                "type": "string"
+                            },
+                            "version": {
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "id",
+                            "version"
+                        ],
+                        "type": "object"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "id",
+                "version",
+                "policies",
+                "mappings"
+            ],
+            "type": "object"
+        },
+        "x_anchore_account": {
+            "required": false,
+            "type": "string"
+        }
+    }
+}

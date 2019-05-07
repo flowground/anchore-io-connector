@@ -1,0 +1,9 @@
+{
+    "type": "object",
+    "properties": {
+        "x_anchore_account": {
+            "required": false,
+            "type": "string"
+        }
+    }
+}

@@ -1,0 +1,21 @@
+{
+    "type": "object",
+    "properties": {
+        "repository": {
+            "required": true,
+            "type": "string"
+        },
+        "autosubscribe": {
+            "required": false,
+            "type": "boolean"
+        },
+        "lookuptag": {
+            "required": false,
+            "type": "string"
+        },
+        "x_anchore_account": {
+            "required": false,
+            "type": "string"
+        }
+    }
+}

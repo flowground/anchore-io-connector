@@ -1,0 +1,17 @@
+{
+    "type": "object",
+    "properties": {
+        "subscription_key": {
+            "required": false,
+            "type": "string"
+        },
+        "subscription_type": {
+            "required": false,
+            "type": "string"
+        },
+        "x_anchore_account": {
+            "required": false,
+            "type": "string"
+        }
+    }
+}

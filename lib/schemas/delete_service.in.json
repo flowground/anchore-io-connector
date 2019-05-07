@@ -1,0 +1,13 @@
+{
+    "type": "object",
+    "properties": {
+        "servicename": {
+            "required": true,
+            "type": "string"
+        },
+        "hostid": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

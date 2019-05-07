@@ -1,0 +1,13 @@
+{
+    "type": "object",
+    "properties": {
+        "requestBody": {
+            "description": "Analysis report json to be imported",
+            "type": "object"
+        },
+        "x_anchore_account": {
+            "required": false,
+            "type": "string"
+        }
+    }
+}

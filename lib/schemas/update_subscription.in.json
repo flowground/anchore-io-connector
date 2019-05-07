@@ -1,0 +1,28 @@
+{
+    "type": "object",
+    "properties": {
+        "subscriptionId": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "description": "A modification to a subscription entry to change its status or value",
+            "properties": {
+                "active": {
+                    "description": "Toggle the subscription processing on or off",
+                    "type": "boolean"
+                },
+                "subscription_value": {
+                    "description": "The new subscription value, e.g. the new tag to be subscribed to",
+                    "type": "string",
+                    "nullable": true
+                }
+            },
+            "type": "object"
+        },
+        "x_anchore_account": {
+            "required": false,
+            "type": "string"
+        }
+    }
+}

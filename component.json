@@ -1,0 +1,1275 @@
+{
+    "title": "Anchore Engine API Server",
+    "description": "This is the Anchore Engine API. Provides the primary external API for users of the service.",
+    "docsUrl": "",
+    "url": "https://api.apis.guru/v2/specs/anchore.io/0.1.9/swagger.json",
+    "envVars": {},
+    "credentials": {
+        "fields": {
+            "server": {
+                "label": "Server",
+                "viewClass": "SelectView",
+                "model": [
+                    "http://anchore.local/",
+                    "https://anchore.local/",
+                    "--- Custom URL"
+                ],
+                "required": true
+            },
+            "otherServer": {
+                "label": "Custom Server URL",
+                "viewClass": "TextFieldView"
+            },
+            "username": {
+                "label": "Username (basicAuth)",
+                "viewClass": "TextFieldView"
+            },
+            "password": {
+                "label": "Password (basicAuth)",
+                "viewClass": "TextFieldView"
+            }
+        }
+    },
+    "triggers": {
+        "startFlow": {
+            "main": "./lib/triggers/startFlow.js",
+            "type": "polling",
+            "title": "Start Flow",
+            "fields": {}
+        }
+    },
+    "actions": {
+        "ping": {
+            "main": "./lib/actions/ping.js",
+            "title": "Simple status check",
+            "description": "Simple status check",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/ping.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "get_users_account": {
+            "main": "./lib/actions/get_users_account.js",
+            "title": "List the account for the authenticated user",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_users_account.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "list_accounts": {
+            "main": "./lib/actions/list_accounts.js",
+            "title": "List user summaries. Only available to the system admin user.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/list_accounts.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "create_account": {
+            "main": "./lib/actions/create_account.js",
+            "title": "Create a new user. Only avaialble to admin user.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/create_account.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "delete_account": {
+            "main": "./lib/actions/delete_account.js",
+            "title": "Delete the specified account, only allowed if the account is in the disabled state. All users will be deleted along with the account and all resources will be garbage collected",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/delete_account.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "get_account": {
+            "main": "./lib/actions/get_account.js",
+            "title": "Get info about an user. Only available to admin user. Uses the main user Id, not a username.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_account.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "update_account_state": {
+            "main": "./lib/actions/update_account_state.js",
+            "title": "Update the state of an account to either enabled or disabled. For deletion use the DELETE route",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/update_account_state.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "list_users": {
+            "main": "./lib/actions/list_users.js",
+            "title": "List accounts for the user",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/list_users.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "create_user": {
+            "main": "./lib/actions/create_user.js",
+            "title": "Create a new user",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/create_user.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "delete_user": {
+            "main": "./lib/actions/delete_user.js",
+            "title": "Delete a specific user credential by username of the credential. Cannot be the credential used to authenticate the request.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/delete_user.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "get_account_user": {
+            "main": "./lib/actions/get_account_user.js",
+            "title": "Get a specific user in the specified account",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_account_user.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "delete_user_credential": {
+            "main": "./lib/actions/delete_user_credential.js",
+            "title": "Delete a credential by type",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/delete_user_credential.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "list_user_credentials": {
+            "main": "./lib/actions/list_user_credentials.js",
+            "title": "Get current credential summary",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/list_user_credentials.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "create_user_credential": {
+            "main": "./lib/actions/create_user_credential.js",
+            "title": "add/replace credential",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/create_user_credential.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "delete_events": {
+            "main": "./lib/actions/delete_events.js",
+            "title": "Delete Events",
+            "description": "Delete all or a subset of events filtered using the optional query parameters",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/delete_events.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "list_events": {
+            "main": "./lib/actions/list_events.js",
+            "title": "List Events",
+            "description": "Returns a paginated list of events in the descending order of their occurrence. Optional query parameters may be used for filtering results",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/list_events.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "delete_event": {
+            "main": "./lib/actions/delete_event.js",
+            "title": "Delete Event",
+            "description": "Delete an event by its event ID",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/delete_event.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "get_event": {
+            "main": "./lib/actions/get_event.js",
+            "title": "Get Event",
+            "description": "Lookup an event by its event ID",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_event.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "health_noop": {
+            "main": "./lib/actions/health_noop.js",
+            "title": "Health check, returns 200 and no body if service is running",
+            "description": "Health check, returns 200 and no body if service is running",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/health_noop.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "import_image": {
+            "main": "./lib/actions/import_image.js",
+            "title": "Import and image analysis directly",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/import_image.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "list_images": {
+            "main": "./lib/actions/list_images.js",
+            "title": "List all visible images",
+            "description": "List all images visible to the user",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/list_images.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "add_image": {
+            "main": "./lib/actions/add_image.js",
+            "title": "Submit a new image for analysis by the engine",
+            "description": "Creates a new analysis task that is executed asynchronously",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/add_image.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "delete_image_by_imageId": {
+            "main": "./lib/actions/delete_image_by_imageId.js",
+            "title": "Delete image by docker imageId",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/delete_image_by_imageId.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "get_image_by_imageId": {
+            "main": "./lib/actions/get_image_by_imageId.js",
+            "title": "Lookup image by docker imageId",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_image_by_imageId.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "get_image_policy_check_by_imageId": {
+            "main": "./lib/actions/get_image_policy_check_by_imageId.js",
+            "title": "Check policy evaluation status for image",
+            "description": "Get the policy evaluation for the given image",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_image_policy_check_by_imageId.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "list_image_content_by_imageid": {
+            "main": "./lib/actions/list_image_content_by_imageid.js",
+            "title": "List image content types",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/list_image_content_by_imageid.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "get_image_content_by_type_imageId_files": {
+            "main": "./lib/actions/get_image_content_by_type_imageId_files.js",
+            "title": "Get the content of an image by type files",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_image_content_by_type_imageId_files.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "get_image_content_by_type_imageId_javapackage": {
+            "main": "./lib/actions/get_image_content_by_type_imageId_javapackage.js",
+            "title": "Get the content of an image by type java",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_image_content_by_type_imageId_javapackage.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "get_image_content_by_type_imageId": {
+            "main": "./lib/actions/get_image_content_by_type_imageId.js",
+            "title": "Get the content of an image by type",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_image_content_by_type_imageId.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "get_image_vulnerability_types_by_imageId": {
+            "main": "./lib/actions/get_image_vulnerability_types_by_imageId.js",
+            "title": "Get vulnerability types",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_image_vulnerability_types_by_imageId.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "get_image_vulnerabilities_by_type_imageId": {
+            "main": "./lib/actions/get_image_vulnerabilities_by_type_imageId.js",
+            "title": "Get vulnerabilities by type",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_image_vulnerabilities_by_type_imageId.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "delete_image": {
+            "main": "./lib/actions/delete_image.js",
+            "title": "Delete an image analysis",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/delete_image.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "get_image": {
+            "main": "./lib/actions/get_image.js",
+            "title": "Get image metadata",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_image.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "get_image_policy_check": {
+            "main": "./lib/actions/get_image_policy_check.js",
+            "title": "Check policy evaluation status for image",
+            "description": "Get the policy evaluation for the given image",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_image_policy_check.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "list_image_content": {
+            "main": "./lib/actions/list_image_content.js",
+            "title": "List image content types",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/list_image_content.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "get_image_content_by_type_files": {
+            "main": "./lib/actions/get_image_content_by_type_files.js",
+            "title": "Get the content of an image by type files",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_image_content_by_type_files.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "get_image_content_by_type_javapackage": {
+            "main": "./lib/actions/get_image_content_by_type_javapackage.js",
+            "title": "Get the content of an image by type java",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_image_content_by_type_javapackage.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "get_image_content_by_type": {
+            "main": "./lib/actions/get_image_content_by_type.js",
+            "title": "Get the content of an image by type",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_image_content_by_type.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "list_image_metadata": {
+            "main": "./lib/actions/list_image_metadata.js",
+            "title": "List image metadata types",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/list_image_metadata.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "get_image_metadata_by_type": {
+            "main": "./lib/actions/get_image_metadata_by_type.js",
+            "title": "Get the metadata of an image by type",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_image_metadata_by_type.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "get_image_vulnerability_types": {
+            "main": "./lib/actions/get_image_vulnerability_types.js",
+            "title": "Get vulnerability types",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_image_vulnerability_types.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "get_image_vulnerabilities_by_type": {
+            "main": "./lib/actions/get_image_vulnerabilities_by_type.js",
+            "title": "Get vulnerabilities by type",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_image_vulnerabilities_by_type.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "list_policies": {
+            "main": "./lib/actions/list_policies.js",
+            "title": "List policies",
+            "description": "List all saved policy bundles",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/list_policies.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "add_policy": {
+            "main": "./lib/actions/add_policy.js",
+            "title": "Add a new policy",
+            "description": "Adds a new policy bundle to the system",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/add_policy.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "delete_policy": {
+            "main": "./lib/actions/delete_policy.js",
+            "title": "Delete policy",
+            "description": "Delete the specified policy",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/delete_policy.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "get_policy": {
+            "main": "./lib/actions/get_policy.js",
+            "title": "Get specific policy",
+            "description": "Get the policy bundle content",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_policy.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "update_policy": {
+            "main": "./lib/actions/update_policy.js",
+            "title": "Update policy",
+            "description": "Update/replace and existing policy",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/update_policy.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "query_images_by_package": {
+            "main": "./lib/actions/query_images_by_package.js",
+            "title": "List of images containing given package",
+            "description": "Filterable query interface to search for images containing specified package",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/query_images_by_package.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "query_images_by_vulnerability": {
+            "main": "./lib/actions/query_images_by_vulnerability.js",
+            "title": "List images vulnerable to the specific vulnerability ID.",
+            "description": "Returns a listing of images and their respective packages vulnerable to the given vulnerability ID",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/query_images_by_vulnerability.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "query_vulnerabilities": {
+            "main": "./lib/actions/query_vulnerabilities.js",
+            "title": "Listing information about given vulnerability",
+            "description": "List (w/filters) vulnerability records known by the system, with affected packages information if present",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/query_vulnerabilities.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "list_registries": {
+            "main": "./lib/actions/list_registries.js",
+            "title": "List configured registries",
+            "description": "List all configured registries the system can/will watch",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/list_registries.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "create_registry": {
+            "main": "./lib/actions/create_registry.js",
+            "title": "Add a new registry",
+            "description": "Adds a new registry to the system",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/create_registry.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "delete_registry": {
+            "main": "./lib/actions/delete_registry.js",
+            "title": "Delete a registry configuration",
+            "description": "Delete a registry configuration record from the system. Does not remove any images.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/delete_registry.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "get_registry": {
+            "main": "./lib/actions/get_registry.js",
+            "title": "Get a specific registry configuration",
+            "description": "Get information on a specific registry",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_registry.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "update_registry": {
+            "main": "./lib/actions/update_registry.js",
+            "title": "Update/replace a registry configuration",
+            "description": "Replaces an existing registry record with the given record",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/update_registry.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "add_repository": {
+            "main": "./lib/actions/add_repository.js",
+            "title": "Add repository to watch",
+            "description": "",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/add_repository.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "get_status": {
+            "main": "./lib/actions/get_status.js",
+            "title": "Service status",
+            "description": "Get the API service status",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_status.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "list_subscriptions": {
+            "main": "./lib/actions/list_subscriptions.js",
+            "title": "List all subscriptions",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/list_subscriptions.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "add_subscription": {
+            "main": "./lib/actions/add_subscription.js",
+            "title": "Add a subscription of a specific type",
+            "description": "Create a new subscription to watch a tag and get notifications of changes",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/add_subscription.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "delete_subscription": {
+            "main": "./lib/actions/delete_subscription.js",
+            "title": "Delete subscriptions of a specific type",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/delete_subscription.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "get_subscription": {
+            "main": "./lib/actions/get_subscription.js",
+            "title": "Get a specific subscription set",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_subscription.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "update_subscription": {
+            "main": "./lib/actions/update_subscription.js",
+            "title": "Update an existing and specific subscription",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/update_subscription.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "list_imagetags": {
+            "main": "./lib/actions/list_imagetags.js",
+            "title": "List all visible image digests and tags",
+            "description": "List all image tags visible to the user",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/list_imagetags.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "get_service_detail": {
+            "main": "./lib/actions/get_service_detail.js",
+            "title": "System status",
+            "description": "Get the system status including queue lengths",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_service_detail.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "get_system_feeds": {
+            "main": "./lib/actions/get_system_feeds.js",
+            "title": "list feeds operations and information",
+            "description": "",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_system_feeds.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "post_system_feeds": {
+            "main": "./lib/actions/post_system_feeds.js",
+            "title": "trigger feeds operations",
+            "description": "",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/post_system_feeds.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "describe_policy": {
+            "main": "./lib/actions/describe_policy.js",
+            "title": "Describe the policy language spec implemented by this service.",
+            "description": "Get the policy language spec for this service",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/describe_policy.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "list_services": {
+            "main": "./lib/actions/list_services.js",
+            "title": "List system services",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/list_services.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "get_services_by_name": {
+            "main": "./lib/actions/get_services_by_name.js",
+            "title": "Get a service configuration and state",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_services_by_name.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "delete_service": {
+            "main": "./lib/actions/delete_service.js",
+            "title": "Delete the service config",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/delete_service.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "get_services_by_name_and_host": {
+            "main": "./lib/actions/get_services_by_name_and_host.js",
+            "title": "Get service config for a specific host",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_services_by_name_and_host.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "get_user": {
+            "main": "./lib/actions/get_user.js",
+            "title": "List authenticated user info",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_user.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "get_credentials": {
+            "main": "./lib/actions/get_credentials.js",
+            "title": "Get current credential summary",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_credentials.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "add_credential": {
+            "main": "./lib/actions/add_credential.js",
+            "title": "add/replace credential",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/add_credential.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "version_noop": {
+            "main": "./lib/actions/version_noop.js",
+            "title": "Returns the version object for the service, including db schema version info",
+            "description": "Returns the version object for the service, including db schema version info",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/version_noop.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        }
+    }
+}

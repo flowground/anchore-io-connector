@@ -1,0 +1,26 @@
+{
+    "type": "object",
+    "properties": {
+        "id": {
+            "required": true,
+            "type": "string"
+        },
+        "affected_package": {
+            "required": false,
+            "type": "string"
+        },
+        "affected_package_version": {
+            "required": false,
+            "type": "string"
+        },
+        "page": {
+            "required": false,
+            "type": "string",
+            "default": "1"
+        },
+        "limit": {
+            "required": false,
+            "type": "integer"
+        }
+    }
+}

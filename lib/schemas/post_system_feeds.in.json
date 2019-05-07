@@ -1,0 +1,13 @@
+{
+    "type": "object",
+    "properties": {
+        "flush": {
+            "required": false,
+            "type": "boolean"
+        },
+        "sync": {
+            "required": false,
+            "type": "boolean"
+        }
+    }
+}

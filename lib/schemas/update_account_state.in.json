@@ -1,0 +1,23 @@
+{
+    "type": "object",
+    "properties": {
+        "accountname": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "description": "A summary of account status",
+            "properties": {
+                "state": {
+                    "description": "The status of the account",
+                    "enum": [
+                        "enabled",
+                        "disabled"
+                    ],
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        }
+    }
+}

@@ -1,0 +1,29 @@
+{
+    "type": "object",
+    "properties": {
+        "imageId": {
+            "required": true,
+            "type": "string"
+        },
+        "policyId": {
+            "required": false,
+            "type": "string"
+        },
+        "tag": {
+            "required": true,
+            "type": "string"
+        },
+        "detail": {
+            "required": false,
+            "type": "boolean"
+        },
+        "history": {
+            "required": false,
+            "type": "boolean"
+        },
+        "x_anchore_account": {
+            "required": false,
+            "type": "string"
+        }
+    }
+}

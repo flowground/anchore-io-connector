@@ -1,0 +1,32 @@
+{
+    "type": "object",
+    "properties": {
+        "requestBody": {
+            "description": "A subscription entry to add to the system",
+            "properties": {
+                "subscription_key": {
+                    "type": "string"
+                },
+                "subscription_type": {
+                    "enum": [
+                        "policy_eval",
+                        "tag_update",
+                        "vuln_update",
+                        "repo_update",
+                        "analysis_update"
+                    ],
+                    "type": "string"
+                },
+                "subscription_value": {
+                    "type": "string",
+                    "nullable": true
+                }
+            },
+            "type": "object"
+        },
+        "x_anchore_account": {
+            "required": false,
+            "type": "string"
+        }
+    }
+}

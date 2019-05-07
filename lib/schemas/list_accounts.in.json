@@ -1,0 +1,14 @@
+{
+    "type": "object",
+    "properties": {
+        "state": {
+            "required": false,
+            "type": "string",
+            "enum": [
+                "active",
+                "disabled",
+                "deleting"
+            ]
+        }
+    }
+}

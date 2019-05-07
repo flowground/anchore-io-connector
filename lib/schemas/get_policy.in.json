@@ -1,0 +1,17 @@
+{
+    "type": "object",
+    "properties": {
+        "policyId": {
+            "required": true,
+            "type": "string"
+        },
+        "detail": {
+            "required": false,
+            "type": "boolean"
+        },
+        "x_anchore_account": {
+            "required": false,
+            "type": "string"
+        }
+    }
+}

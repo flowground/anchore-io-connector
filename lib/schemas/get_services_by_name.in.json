@@ -1,0 +1,9 @@
+{
+    "type": "object",
+    "properties": {
+        "servicename": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}
